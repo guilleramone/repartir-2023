@@ -30,7 +30,22 @@ class GrupoTest {
         assertThat(grupo.getMiembros()).isNull();
         assertThat(grupo.getTotal()).isNull();
     }
+    @Test
+    void crearConNombreValido() {
 
+        Grupo grupo = new Grupo();
+        grupo.setNombre("Luis");
+        assertThat(grupo.getNombre() == "Luis");
+    }
+    @Test
+    void noEsValidoConNombreDeUnCaracter() {
+
+        Grupo grupo = new Grupo();
+
+        assertThatIllegalArgumentException()
+                .isThrownBy( () -> { grupo.setNombre(""); })
+                .withMessage("El Grupo debe tener un nombre de mas un caracter");
+    }
     @Test
     void noEstaFormadoCuandoTieneSoloUnMiembro() {
 
