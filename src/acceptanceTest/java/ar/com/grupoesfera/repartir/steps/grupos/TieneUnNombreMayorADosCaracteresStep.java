@@ -7,16 +7,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
+public class TieneUnNombreMayorADosCaracteresStep extends CucumberSteps {
 
-    @Cuando("el usuario crea un grupo con nombre de mas de 2 caracteres")
-    public void elUsuarioCreaUnGrupoIndicandoQueSuNombreEsGrupoDePrueba() {
+    @Cuando("el usuario crea un grupo con el nombre Grupo De Prueba")
+    public void ElUsuarioCreaUnGrupoConElNombreGrupoDePrueba() {
 
         var crearGruposButton = driver.findElement(By.id("crearGruposButton"));
         crearGruposButton.click();
@@ -35,8 +33,8 @@ public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
         wait.until(visibilityOfElementLocated(By.id("mensajesToast")));
     }
 
-    @Entonces("visualiza el grupo con el nombre de mas de 2 caracteres")
-    public void visualizaElGrupoConElNombreIndicado() {
+    @Entonces("visualiza el grupo con el nombre Grupo De Prueba")
+    public void visualizaElGrupoConElNombreGrupoDePrueba() {
 
         var grupoTR = driver.findElements(By.cssSelector("app-grupos table tr"));
         assertThat(grupoTR).hasSizeGreaterThan(1);
@@ -45,8 +43,8 @@ public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
         assertThat(campoTDs.get(0).getText()).equals("Grupo de prueba");
     }
 
-    @Cuando("el usuario intenta crear un grupo con nombre menor a 2 caracteres")
-    public void elUsuarioIntentaCrearGrupoElNombreMenorADosCaracteres() {
+    @Cuando("el usuario intenta crear un grupo con nombre G")
+    public void elUsuarioIntentaCrearUnGrupoConNombreG() {
 
         var crearGruposButton = driver.findElement(By.id("crearGruposButton"));
         crearGruposButton.click();
@@ -66,8 +64,8 @@ public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
         wait.until(visibilityOfElementLocated(By.id("mensajesToast")));
     }
 
-    @Entonces("no debería crear el grupo con nombre menor a 2 caracteres")
-    public void noDeberiaCrearElGrupoConNombreIndicado() {
+    @Entonces("no debería crear el grupo con nombre G")
+    public void noDeberiaCrearElGrupoConNombreG() {
 
         var wait = new WebDriverWait(driver, 2);
         var mensajesToast = wait.withMessage("Mostro Toast")

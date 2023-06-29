@@ -36,14 +36,14 @@ Característica: Crear Grupo para repartir gastos
       Cuando el usuario crea un grupo
       Entonces debería visualiza dentro del listado el grupo creado con total '$  0,00'
 
-  Regla: Los grupos deben tener un nombre mayor a 2 caracteres
+  Regla: Los grupos tienen un nombre mayor a dos caracteres
 
     Escenario: Crear grupo con nombre mayor a 2 caracteres
       Dado que el usuario inició Repartir
-      Cuando el usuario crea un grupo con el nombre "Grupo de prueba"
-      Entonces visualiza el grupo con el nombre "Grupo de prueba"
+      Cuando el usuario crea un grupo con el nombre Grupo De Prueba
+      Entonces visualiza el grupo con el nombre Grupo De Prueba
 
     Escenario: Crear grupo con nombre menor a 2 caracteres
       Dado que el usuario inició Repartir
-      Cuando el usuario intenta crear un grupo con nombre "G"
-      Entonces no debería crear el grupo con nombre "G"
+      Cuando el usuario intenta crear un grupo con nombre G
+      Entonces no debería crear el grupo con nombre G
