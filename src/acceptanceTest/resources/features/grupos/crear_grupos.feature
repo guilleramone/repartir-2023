@@ -40,10 +40,10 @@ Característica: Crear Grupo para repartir gastos
 
     Escenario: Crear grupo con nombre mayor a 2 caracteres
       Dado que el usuario inició Repartir
-      Cuando el usuario crea un grupo con el nombre 'Grupo de prueba'
-      Entonces visualiza el grupo con el nombre 'Grupo de prueba'
+      Cuando el usuario crea un grupo con el nombre "Grupo de prueba"
+      Entonces visualiza el grupo con el nombre "Grupo de prueba"
 
     Escenario: Crear grupo con nombre menor a 2 caracteres
       Dado que el usuario inició Repartir
-      Cuando el usuario intenta crear un grupo con nombre 'G'
-      Entonces no debería crear el grupo con nombre 'G'
+      Cuando el usuario intenta crear un grupo con nombre "G"
+      Entonces no debería crear el grupo con nombre "G"

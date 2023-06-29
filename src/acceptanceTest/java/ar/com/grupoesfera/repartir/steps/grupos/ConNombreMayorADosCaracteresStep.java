@@ -15,13 +15,13 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
 
-    @Cuando("el usuario crea un grupo con el nombre {nombre} de mas de 2 caracteres")
-    public void elUsuarioCreaUnGrupoIndicandoQueSuNombreEs(String nombre) {
+    @Cuando("el usuario crea un grupo con nombre de mas de 2 caracteres")
+    public void elUsuarioCreaUnGrupoIndicandoQueSuNombreEsGrupoDePrueba() {
 
         var crearGruposButton = driver.findElement(By.id("crearGruposButton"));
         crearGruposButton.click();
 
-        driver.findElement(By.id("nombreGrupoNuevoInput")).sendKeys(nombre);
+        driver.findElement(By.id("nombreGrupoNuevoInput")).sendKeys("Grupo de prueba");
 
         var miembrosInput = driver.findElement(By.id("miembrosGrupoNuevoInput"));
         miembrosInput.sendKeys("Oscar");
@@ -35,23 +35,23 @@ public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
         wait.until(visibilityOfElementLocated(By.id("mensajesToast")));
     }
 
-    @Entonces("visualiza el grupo con el nombre {nombre} de mas de 2 caracteres")
-    public void visualizaElGrupoConElNombreIndicado(String nombre) {
+    @Entonces("visualiza el grupo con el nombre de mas de 2 caracteres")
+    public void visualizaElGrupoConElNombreIndicado() {
 
         var grupoTR = driver.findElements(By.cssSelector("app-grupos table tr"));
         assertThat(grupoTR).hasSizeGreaterThan(1);
 
         var campoTDs = grupoTR.get(1).findElements(By.tagName("td"));
-        assertThat(campoTDs.get(0).getText()).equals(nombre);
+        assertThat(campoTDs.get(0).getText()).equals("Grupo de prueba");
     }
 
-    @Cuando("el usuario intenta crear un grupo con nombre {nombre} menor a 2 caracteres")
-    public void elUsuarioIntentaCrearGrupoElNombreMenorADosCaracteres(String nombre) {
+    @Cuando("el usuario intenta crear un grupo con nombre menor a 2 caracteres")
+    public void elUsuarioIntentaCrearGrupoElNombreMenorADosCaracteres() {
 
         var crearGruposButton = driver.findElement(By.id("crearGruposButton"));
         crearGruposButton.click();
 
-        driver.findElement(By.id("nombreGrupoNuevoInput")).sendKeys(nombre);
+        driver.findElement(By.id("nombreGrupoNuevoInput")).sendKeys("G");
 
         var miembrosInput = driver.findElement(By.id("miembrosGrupoNuevoInput"));
         miembrosInput.sendKeys("Oscar");
@@ -66,7 +66,7 @@ public class ConNombreMayorADosCaracteresStep extends CucumberSteps {
         wait.until(visibilityOfElementLocated(By.id("mensajesToast")));
     }
 
-    @Entonces("no debería crear el grupo con nombre {nombre} menor a 2 caracteres")
+    @Entonces("no debería crear el grupo con nombre menor a 2 caracteres")
     public void noDeberiaCrearElGrupoConNombreIndicado() {
 
         var wait = new WebDriverWait(driver, 2);
