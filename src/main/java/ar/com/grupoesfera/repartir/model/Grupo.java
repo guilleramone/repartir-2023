@@ -49,7 +49,7 @@ public class Grupo {
 
     public void setNombre(String nombre) {
         if (nombre.length() <= 1) {
-            throw new IllegalArgumentException("El Grupo debe tener un nombre de mas un caracter");
+            throw new IllegalArgumentException("El Grupo debe tener un nombre de mas de un caracter");
         }
         this.nombre = nombre;
     }

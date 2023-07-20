@@ -84,4 +84,66 @@ public class NombreQueLosIdentificaSteps extends CucumberSteps {
                 .contains("No se puede guardar");
     }
 
+    @Cuando("el usuario crea un grupo con el nombre Grupo De Prueba")
+    public void ElUsuarioCreaUnGrupoConElNombreGrupoDePrueba() {
+        var wait = new WebDriverWait(driver, 2);
+        var crearGruposButton = wait.until(elementToBeClickable(By.id("crearGruposButton")));
+        crearGruposButton.click();
+
+        driver.findElement(By.id("nombreGrupoNuevoInput")).sendKeys("Grupo de prueba");
+
+        var miembrosInput = driver.findElement(By.id("miembrosGrupoNuevoInput"));
+        miembrosInput.sendKeys("Oscar");
+        miembrosInput.sendKeys(Keys.ENTER);
+        miembrosInput.sendKeys("Pablo");
+        miembrosInput.sendKeys(Keys.ENTER);
+
+        driver.findElement(By.id("guardarGrupoNuevoButton")).click();
+
+        wait.until(visibilityOfElementLocated(By.id("mensajesToast")));
+    }
+
+    @Entonces("visualiza el grupo con el nombre Grupo De Prueba")
+    public void visualizaElGrupoConElNombreGrupoDePrueba() {
+
+        var grupoTR = driver.findElements(By.cssSelector("app-grupos table tr"));
+        assertThat(grupoTR).hasSizeGreaterThanOrEqualTo(1);
+
+        var campoTDs = grupoTR.get(1).findElements(By.tagName("td"));
+        assertThat(campoTDs.get(0).getText()).isNotEmpty();
+        assertThat(campoTDs.get(1).getText()).isEqualTo("Grupo de prueba");
+    }
+
+    @Cuando("el usuario intenta crear un grupo con nombre G")
+    public void elUsuarioIntentaCrearUnGrupoConNombreG() {
+        var wait = new WebDriverWait(driver, 2);
+        var crearGruposButton = wait.until(elementToBeClickable(By.id("crearGruposButton")));
+        crearGruposButton.click();
+
+        driver.findElement(By.id("nombreGrupoNuevoInput")).sendKeys("G");
+
+        var miembrosInput = driver.findElement(By.id("miembrosGrupoNuevoInput"));
+        miembrosInput.sendKeys("Oscar");
+
+        miembrosInput.sendKeys(Keys.ENTER);
+        miembrosInput.sendKeys("Pablo");
+        miembrosInput.sendKeys(Keys.ENTER);
+
+        driver.findElement(By.id("guardarGrupoNuevoButton")).click();
+
+        wait.until(visibilityOfElementLocated(By.id("mensajesToast")));
+    }
+
+    @Entonces("no debería crear el grupo con nombre G")
+    public void noDeberiaCrearElGrupoConNombreG() {
+
+        var wait = new WebDriverWait(driver, 2);
+        var mensajesToast = wait.withMessage("Mostro Toast")
+                .until(visibilityOfElementLocated(By.id("mensajesToast")));
+        wait.withMessage("Título del Toast es 'Error'")
+                .until(textToBePresentInElement(mensajesToast, "Error"));
+        assertThat(mensajesToast.getText())
+                .as("Descripción del Toast")
+                .contains("No se puede guardar");
+    }
 }
